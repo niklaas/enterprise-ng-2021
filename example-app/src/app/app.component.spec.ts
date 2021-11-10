@@ -9,14 +9,18 @@ describe('AppComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [AppComponent],
+        imports: [],
+        providers: [],
       }).compileComponents();
 
       fixture = TestBed.createComponent(AppComponent);
       component = fixture.componentInstance;
+
+      fixture.detectChanges();
     })
   );
 
-  it('should create the app', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 });
