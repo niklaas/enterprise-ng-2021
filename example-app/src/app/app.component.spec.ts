@@ -5,6 +5,7 @@ import { SomeService } from './some.service';
 import { SomeComponent } from './some/some.component';
 import { SomePipe } from './some.pipe';
 import { SomeDirective } from './some.directive';
+import { SomeComponentProvidedService } from './some-component-provided.service';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -13,10 +14,19 @@ describe('AppComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [AppComponent, MockDeclarations(SomeComponent, SomePipe, SomeDirective)],
+        declarations: [
+          AppComponent,
+          MockDeclarations(SomeComponent, SomePipe, SomeDirective),
+        ],
         imports: [],
         providers: [MockProviders(SomeService)],
       }).compileComponents();
+
+      TestBed.overrideComponent(AppComponent, {
+        set: {
+          providers: [MockProviders(SomeComponentProvidedService)],
+        },
+      });
 
       fixture = TestBed.createComponent(AppComponent);
       component = fixture.componentInstance;
